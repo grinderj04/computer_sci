@@ -163,3 +163,23 @@ def alter_all_images(width, height, directory=None):
        
         resized_image_filename = os.path.join(new_directory, filename + '.png')
         resized_image.save(resized_image_filename)
+        
+def frame_all_images_fam(color, thickness, directory=None):
+   
+    if directory == None:
+        directory = os.getcwd()
+       
+    new_directory = os.path.join(directory, 'My Framed Family')
+    try:
+        os.mkdir(new_directory)
+    except OSError:
+        pass
+   
+    image_list, file_list = get_images(directory)  
+    for n in range(len(image_list)):
+        filename, filetype = file_list[n].split('.')
+               
+        framed_image = frame_image(image_list[n], color, thickness)
+       
+        framed_image_filename = os.path.join(new_directory, filename + '.png')
+        framed_image.save(framed_image_filename)
